@@ -6,12 +6,16 @@ window.addEventListener('load', function () {
         testApi();
     });
 
-}, false );
+}, false);
 
-async function testApi(){
-    let result = await MUtil.ajax('http://my-json-server.typicode.com/burakburuk/testApi/posts/1', {
-        method: 'GET'});
-
-    console.log(result);
+async function testApi() {
+    try {
+        let result = await MUtil.ajax('http://my-json-server.typicode.com/burakburuk/testApi/posts/1', {
+            method: 'GET'
+        });
+        console.log(result);
+    } catch (err) {
+        console.log(err);
+    }
 }
 
