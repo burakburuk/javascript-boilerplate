@@ -1,2 +1,2 @@
 # javascript-test
-It creates a javascript template
+It is a javascript template for ES6 projects
