@@ -3,14 +3,6 @@ export default class MUtil {
 
     }
 
-    static createRequest() {
-        if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
-            return new XMLHttpRequest();
-        } else if (window.ActiveXObject) { // IE 6 and older
-            return new ActiveXObject("Microsoft.XMLHTTP");
-        }
-    }
-
     static async ajax(url, methodObj) {
         return new Promise((resolve, reject) => {
 
@@ -19,7 +11,7 @@ export default class MUtil {
                 contentType: 'application/json'
             }, methodObj);
 
-            var xhr = this.createRequest();
+            var xhr = new XMLHttpRequest();
             xhr.open(methodObj.method, url);
             xhr.withCredentials = true;
             xhr.setRequestHeader('Content-Type', methodObj.contentType);
