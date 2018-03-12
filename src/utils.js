@@ -15,7 +15,7 @@ export default class MUtil {
         return new Promise((resolve, reject) => {
 
             methodObj = Object.assign({
-                method: 'POST',
+                method: 'GET',
                 contentType: 'application/json'
             }, methodObj);
 
