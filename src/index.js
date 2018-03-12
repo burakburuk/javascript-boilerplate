@@ -10,19 +10,21 @@ window.addEventListener('load', function () {
 
 }, false);
 
+function populateSelectBox(personList) {
+    let select = document.getElementsByTagName('select')[0];
+    personList.forEach(function (item) {
+        let option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item.name + " " + item.surname;
+        select.appendChild(option);
+    });
+}
+
 async function getAllPersonList() {
     try {
         let personList = await MUtil.ajax(_host + 'person');
         personList = JSON.parse(personList);
-
-        let select = document.getElementsByTagName('select')[0];
-        personList.forEach(function (item) {
-            let option = document.createElement('option');
-            option.value = item.id;
-            option.textContent = item.name + " " + item.surname;
-            select.appendChild(option);
-        });
-
+        populateSelectBox(personList);
     } catch (error) {
         alert("Person list could not be fetched!");
     }
@@ -47,4 +49,3 @@ async function testApi() {
         alert(err.statusText);
     }
 }
-
