@@ -1,5 +1,7 @@
 import MUtil from "./utils";
 
+var _host = 'http://my-json-server.typicode.com/burakburuk/javascript-test/';
+
 window.addEventListener('load', function () {
 
     document.getElementById("btnTest").addEventListener("click", function (e) {
@@ -10,7 +12,7 @@ window.addEventListener('load', function () {
 
 async function testApi() {
     try {
-        let result = await MUtil.ajax('http://my-json-server.typicode.com/burakburuk/testApi/posts/1', {
+        let result = await MUtil.ajax(_host + 'person/1', {
             method: 'GET'
         });
         console.log(result);
