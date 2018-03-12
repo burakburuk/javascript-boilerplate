@@ -3,6 +3,7 @@ import MUtil from "./utils";
 var _host = 'http://my-json-server.typicode.com/burakburuk/javascript-test/';
 
 window.addEventListener('load', function () {
+    window.resultBox = document.getElementsByTagName('textarea')[0]
     getAllPersonList();
     document.getElementById("btnTest").addEventListener("click", function (e) {
         testApi();
@@ -26,13 +27,12 @@ async function getAllPersonList() {
         personList = JSON.parse(personList);
         populateSelectBox(personList);
     } catch (error) {
-        alert("Person list could not be fetched!");
+        resultBox.innerText = "Person list could not be fetched!";
     }
 }
 
 async function testApi() {
     try {
-        let resultBox = document.getElementsByTagName('textarea')[0];
         let select = document.getElementsByTagName('select')[0];
         if (select && select.value) {
             let person = await MUtil.ajax(_host + 'person/' + select.value);
@@ -46,6 +46,7 @@ async function testApi() {
             resultBox.innerText = "Please Select Person!";
         }
     } catch (err) {
-        alert(err.statusText);
+        resultBox.innerText = err.statusText;
     }
 }
+
