@@ -4,7 +4,9 @@
     {"id":2, "name":"Berkan", "surname":"Buruk"},
     {"id":3, "name":"Aybike", "surname":"Sivri"}
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "address": [
+    {"id":1, "person_id":1, "city": "ankara"},
+    {"id":2, "person_id":2, "city": "corum"},
+    {"id":3, "person_id":3, "city": "ibiza"}
+  ]
 }
