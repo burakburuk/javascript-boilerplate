@@ -1,0 +1,10 @@
+{
+  "person": [
+    {"id":1, "name":"Burak", "surname":"Buruk"},
+    {"id":2, "name":"Berkan", "surname":"Buruk"},
+    {"id":3, "name":"Aybike", "surname":"Sivri"}
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
