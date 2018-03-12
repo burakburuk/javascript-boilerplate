@@ -4,7 +4,6 @@ export default class MUtil {
     }
 
     static createRequest() {
-        // Old compatibility code, no longer needed.
         if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
             return new XMLHttpRequest();
         } else if (window.ActiveXObject) { // IE 6 and older
@@ -17,10 +16,7 @@ export default class MUtil {
 
             methodObj = Object.assign({
                 method: 'POST',
-                contentType: 'application/json',
-                beforeSend: function (xmlHttpRequest) {
-                    xmlHttpRequest.withCredentials = true;
-                }
+                contentType: 'application/json'
             }, methodObj);
 
             var xhr = this.createRequest();
@@ -35,13 +31,19 @@ export default class MUtil {
             }
 
             xhr.onreadystatechange = function () {
-                // Process the server response here.
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         resolve(xhr.responseText);
                     } else {
-                        debugger;
-                        reject(xhr.error);
+                        let result = {
+                            response: xhr.responseText,
+                            responseType: xhr.responseType,
+                            responseURL: xhr.responseURL,
+                            responseXML: xhr.responseXML,
+                            status: xhr.status,
+                            statusText: xhr.statusText
+                        };
+                        reject(result);
                     }
                 }
             };
