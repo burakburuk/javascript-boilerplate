@@ -4,9 +4,7 @@ const path = require('path');
 module.exports = {
     devtool: 'inline-source-map',
     resolve: {
-        alias: {
-
-        }
+        alias: {}
     },
     entry: [
         'babel-polyfill',
@@ -19,23 +17,23 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015']
+        loaders: [
+            {
+                test: /\.js?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015', 'react', 'stage-2']
+                }
+            },
+            {
+                test: /\.html$/,
+                loader: 'raw-loader'
             }
-        }, {
-            test: /\.html$/,
-            loader: 'raw-loader'
-        }]
+        ]
     },
     plugins: [
-        // OccurenceOrderPlugin is needed for webpack 1.x only
-        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        // Use NoErrorsPlugin for webpack 1.x
         new webpack.NoEmitOnErrorsPlugin()
     ]
 };
