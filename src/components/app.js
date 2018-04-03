@@ -1,25 +1,55 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Calculator from './calculator';
+import Counter from './counter';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            result: 0
+            count: 0
         };
     }
 
-    handleClick = (sum) => {
-        this.setState({result: sum});
+    componentWillUnmount = () => {
+        clearInterval(this.timer);
+    };
+
+    start = () => {
+        this.timer = setInterval(() => {
+            this.setState((prevState, props) => {
+                return {
+                    count: prevState.count + 1
+                }
+            })
+        }, 500);
+    };
+
+    stop = () => {
+        clearInterval(this.timer);
+    };
+
+    increment = () => {
+        this.setState((prevState, props) => {
+            return {
+                count: prevState.count + 1
+            }
+        })
+    };
+
+    decrement = () => {
+        this.setState((prevState, props) => {
+            return {
+                count: prevState.count - 1
+            }
+        })
     };
 
     render() {
         return (
             <MuiThemeProvider>
-                <Calculator handleClick={this.handleClick}
-                            result={this.state.result}></Calculator>
+                <Counter count={this.state.count} increment={this.increment} decrement={this.decrement}
+                         start={this.start} stop={this.stop}></Counter>
             </MuiThemeProvider>
         );
     }
