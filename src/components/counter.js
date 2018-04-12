@@ -16,13 +16,16 @@ class Counter extends React.Component {
     };
 
     start = () => {
-        this.timer = setInterval(() => {
-            this.increment();
-        }, 500);
+        if (typeof this.timer === 'undefined') {
+            this.timer = setInterval(() => {
+                this.increment();
+            }, 500);
+        }
     };
 
     stop = () => {
         clearInterval(this.timer);
+        delete this.timer;
     };
 
     increment = () => {
