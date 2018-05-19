@@ -2,8 +2,8 @@ import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import Counter from './counter';
 import reducer from '../reducers/reducer';
+import CounterMaterial from "./pages/counter-material";
 
 const store = createStore(reducer);
 
@@ -12,7 +12,7 @@ class App extends React.Component {
         return (
             <MuiThemeProvider>
                 <Provider store={store}>
-                    <Counter></Counter>
+                    <CounterMaterial></CounterMaterial>
                 </Provider>
             </MuiThemeProvider>
         );
@@ -20,3 +20,8 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
+
+

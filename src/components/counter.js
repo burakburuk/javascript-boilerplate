@@ -1,5 +1,5 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 
 class Counter extends React.Component {
@@ -44,19 +44,19 @@ class Counter extends React.Component {
                     <tbody>
                     <tr>
                         <td>
-                            <RaisedButton onClick={this.decrement} label="-"/>
+                            <Button onClick={this.decrement} label="-"/>
                         </td>
                         <td>
                             <span id="counter-span">{this.props.count}</span>
                         </td>
                         <td>
-                            <RaisedButton onClick={this.increment} label="+"/>
+                            <Button onClick={this.increment} label="+"/>
                         </td>
                     </tr>
                     <tr>
                         <td colSpan={3}>
-                            <RaisedButton primary={true} onClick={this.start} label="Start"/>&nbsp;
-                            <RaisedButton secondary={true} onClick={this.stop} label="Stop"/>
+                            <Button primary={true} onClick={this.start} label="Start"/>&nbsp;
+                            <Button secondary={true} onClick={this.stop} label="Stop"/>
                         </td>
                     </tr>
                     </tbody>
