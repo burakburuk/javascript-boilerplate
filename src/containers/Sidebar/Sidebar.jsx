@@ -12,6 +12,8 @@ import {
   ListItemText
 } from "material-ui";
 
+import RibbonMenu from '../Ribbon/RibbonMenu.jsx';
+
 import sidebarStyle from "assets/jss/material-dashboard-react/sidebarStyle.jsx";
 
 const Sidebar = ({ ...props }) => {
@@ -54,7 +56,7 @@ const Sidebar = ({ ...props }) => {
   );
   var brand = (
     <div className={classes.logo}>
-      <a href="https://www.creative-tim.com" className={classes.logoLink}>
+      <a href="#" className={classes.logoLink}>
         <div className={classes.logoImage}>
           <img src={logo} alt="logo" className={classes.img} />
         </div>
@@ -66,8 +68,8 @@ const Sidebar = ({ ...props }) => {
     <div>
       <Hidden mdUp>
         <Drawer
-          variant="temporary"
-          anchor="right"
+          variant="permanent"
+          anchor="left"
           open={props.open}
           classes={{
             paper: classes.drawerPaper
@@ -99,7 +101,7 @@ const Sidebar = ({ ...props }) => {
           }}
         >
           {brand}
-          <div className={classes.sidebarWrapper}>{links}</div>
+          <RibbonMenu></RibbonMenu>
           {image !== undefined ? (
             <div
               className={classes.background}

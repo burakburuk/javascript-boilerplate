@@ -6,7 +6,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { withStyles } from "material-ui";
 
-import Footer from "./Footer/Footer.jsx";
 import Sidebar from "./Sidebar/Sidebar.jsx";
 
 import dashboardRoutes from "../routes/dashboard.jsx";
@@ -37,7 +36,7 @@ class App extends React.Component {
         return this.props.location.pathname !== "/maps";
     }
     componentDidMount() {
-        if(navigator.platform.indexOf('Win') > -1){
+        if (navigator.platform.indexOf('Win') > -1) {
             // eslint-disable-next-line
             const ps = new PerfectScrollbar(this.refs.mainPanel);
         }
@@ -51,7 +50,7 @@ class App extends React.Component {
             <div className={classes.wrapper}>
                 <Sidebar
                     routes={dashboardRoutes}
-                    logoText={"Creative Tim"}
+                    logoText={"KAŞİF"}
                     logo={logo}
                     image={image}
                     handleDrawerToggle={this.handleDrawerToggle}
@@ -66,9 +65,8 @@ class App extends React.Component {
                             <div className={classes.container}>{switchRoutes}</div>
                         </div>
                     ) : (
-                        <div className={classes.map}>{switchRoutes}</div>
-                    )}
-                    {this.getRoute() ? <Footer /> : null}
+                            <div className={classes.map}>{switchRoutes}</div>
+                        )}
                 </div>
             </div>
         );

@@ -16,8 +16,10 @@ const styles = theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
-    pos: {
-        marginBottom: 16,
+    gridItem: {
+        textAlign: 'center',
+        margin: '10px',
+        backgroundColor: theme.palette.background.paper
     }
 });
 
@@ -60,22 +62,16 @@ class Counter extends React.Component {
             <Grid container spacing={16}>
                 <Grid item xs={12}>
                     <Grid container>
-                        <Grid item xs={4}>
-                            <Paper className={classes.paper}>
-                                <Button variant="outlined" color="primary" onClick={this.decrement}>-</Button>
-                            </Paper>
+                        <Grid item xs={3} className={classes.gridItem} >
+                            <Button variant="outlined" color="primary" onClick={this.decrement}>-</Button>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Paper className={classes.paper}>
-                                <Typography className={classes.pos} color="textSecondary">
-                                    {this.props.count}
-                                </Typography>
-                            </Paper>
+                        <Grid item xs={3} className={classes.gridItem}>
+                            <Typography className={classes.pos} color="textSecondary">
+                                {this.props.count}
+                            </Typography>
                         </Grid>
-                        <Grid item xs={4}>
-                            <Paper className={classes.paper}>
-                                <Button variant="outlined" color="primary" onClick={this.increment}>+</Button>
-                            </Paper>
+                        <Grid item xs={3} className={classes.gridItem}>
+                            <Button variant="outlined" color="primary" onClick={this.increment}>+</Button>
                         </Grid>
                     </Grid>
                     <Grid container>

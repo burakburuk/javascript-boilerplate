@@ -15,12 +15,12 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require("webpack-hot-middleware")(compiler));
 
-app.get('/', function (req, res) {
+app.get(['/', '/dashboard'], function (req, res) {
     res.sendFile(path.join(__dirname + '/src/public/index.html'));
 });
 
 app.listen(port, function (error) {
-    if(error) {
+    if (error) {
         console.log(error);
     } else {
         open(`http://localhost:${port}`)
