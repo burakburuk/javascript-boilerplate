@@ -5,7 +5,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabItemContainer from './TabItemContainer.jsx';
-import Typography from '@material-ui/core/Typography';
 import LayerTreePage from '../../components/pages/LayerTreePage.jsx';
 import UnitConverterPage from '../../components/pages/UnitConverterPage.jsx';
 
