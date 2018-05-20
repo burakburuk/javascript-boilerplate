@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 function TabItemContainer(props) {
     return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
+        <Typography component="div" style={{ padding: 4 }}>
             {props.children}
         </Typography>
     );

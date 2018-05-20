@@ -11,9 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-const styles = {
-
-};
+const styles = {};
 
 class UnitConverter extends React.Component {
     state = {
@@ -23,19 +21,19 @@ class UnitConverter extends React.Component {
 
     openPopup1 = () => {
         this.setState({ open1: true });
-    }
+    };
 
     closePopup1 = () => {
         this.setState({ open1: false });
-    }
+    };
 
     openPopup2 = () => {
         this.setState({ open2: true });
-    }
+    };
 
     closePopup2 = () => {
         this.setState({ open2: false });
-    }
+    };
 
     render() {
         const { classes } = this.props;

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducer from '../../reducers/reducer';
 import Grid from '@material-ui/core/Grid';
-import Settings from '../LayerTree/Settings.jsx';
+import Accordion from '../LayerTree/Accordion.jsx';
 
 const store = createStore(reducer);
 
@@ -12,7 +12,7 @@ class LayerTreePage extends React.Component {
         return (
             <Provider store={store}>
                 <Grid container>
-                    <Settings></Settings>
+                    <Accordion></Accordion>
                 </Grid>
             </Provider>
         );
