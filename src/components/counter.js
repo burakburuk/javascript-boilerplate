@@ -1,11 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import {connect} from 'react-redux';
+import Typography from '@material-ui/core/Typography';
+
+const styles = theme => ({
+    app: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    pos: {
+        marginBottom: 16,
+    }
+});
 
 class Counter extends React.Component {
     constructor(props) {
         super(props);
-        //console.dir(props);
         this.state = {
             count: 0
         };
@@ -29,42 +47,58 @@ class Counter extends React.Component {
     };
 
     increment = () => {
-        this.props.dispatch({type: 'INCREMENT'});
+        this.props.dispatch({ type: 'INCREMENT' });
     };
 
     decrement = () => {
-        this.props.dispatch({type: 'DECREMENT'});
+        this.props.dispatch({ type: 'DECREMENT' });
     };
 
     render() {
+        const { classes } = this.props;
         return (
-            <div id="counter-div">
-                <h2>Counter</h2>
-                <table cellSpacing={2} cellPadding={5}>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <Button onClick={this.decrement} label="-"/>
-                        </td>
-                        <td>
-                            <span id="counter-span">{this.props.count}</span>
-                        </td>
-                        <td>
-                            <Button onClick={this.increment} label="+"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan={3}>
-                            <Button primary={true} onClick={this.start} label="Start"/>&nbsp;
-                            <Button secondary={true} onClick={this.stop} label="Stop"/>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <Grid container spacing={16}>
+                <Grid item xs={12}>
+                    <Grid container>
+                        <Grid item xs={4}>
+                            <Paper className={classes.paper}>
+                                <Button variant="outlined" color="primary" onClick={this.decrement}>-</Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={classes.paper}>
+                                <Typography className={classes.pos} color="textSecondary">
+                                    {this.props.count}
+                                </Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Paper className={classes.paper}>
+                                <Button variant="outlined" color="primary" onClick={this.increment}>+</Button>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <Grid item xs={6}>
+                            <Paper className={classes.paper}>
+                                <Button variant="outlined" color="primary" onClick={this.start}>Start</Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Paper className={classes.paper}>
+                                <Button variant="outlined" color="primary" onClick={this.stop}>Stop</Button>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
         )
     }
 }
+
+Counter.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 //“connect” the Counter component to Redux at the bottom:
 function mapStateToProps(state) {
@@ -75,7 +109,7 @@ function mapStateToProps(state) {
 
 //Where previously we were exporting the component itself,
 //now we’re wrapping it with this connect function call.
-export default connect(mapStateToProps)(Counter);
+export default connect(mapStateToProps)(withStyles(styles)(Counter));
 
 
 

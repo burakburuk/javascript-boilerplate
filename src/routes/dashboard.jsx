@@ -12,7 +12,8 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: CounterPage
   },
-  { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
+  { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" },
+  { redirect: true, path: "/dashboard", to: "/dashboard", navbarName: "Redirect" }
 ];
 
 export default dashboardRoutes;
