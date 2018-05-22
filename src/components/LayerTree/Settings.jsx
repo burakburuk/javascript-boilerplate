@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CustomCheckbox from 'kasifTheme/Checkbox';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
@@ -14,7 +12,10 @@ const styles = {
     },
     sizeIcon: {
         fontSize: 23,
-    }
+    },
+    label: {
+        fontSize: 10
+    },
 };
 
 class Settings extends React.Component {
@@ -41,15 +42,11 @@ class Settings extends React.Component {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <Grid container>
+                    <Grid container spacing={8}>
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showGridLines}
                                         onChange={this.handleChange('showGridLines')}
                                         value="showGridLines"
@@ -61,11 +58,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showNavigation}
                                         onChange={this.handleChange('showNavigation')}
                                         value="showNavigation"
@@ -77,11 +70,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.enableTerrain}
                                         onChange={this.handleChange('enableTerrain')}
                                         value="enableTerrain"
@@ -93,11 +82,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showStationModel}
                                         onChange={this.handleChange('showStationModel')}
                                         value="showStationModel"
@@ -109,11 +94,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showScalebar}
                                         onChange={this.handleChange('showScalebar')}
                                         value="showScalebar"
@@ -125,11 +106,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showDrawingPanel}
                                         onChange={this.handleChange('showDrawingPanel')}
                                         value="showDrawingPanel"
@@ -141,11 +118,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showOverviewPanel}
                                         onChange={this.handleChange('showOverviewPanel')}
                                         value="showOverviewPanel"
@@ -157,11 +130,7 @@ class Settings extends React.Component {
                         <Grid item xs={6}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.showStatusbar}
                                         onChange={this.handleChange('showStatusbar')}
                                         value="showStatusbar"
@@ -173,11 +142,7 @@ class Settings extends React.Component {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox
-                                        className={classes.size}
-                                        icon={<CheckBoxOutlineBlankIcon className={classes.sizeIcon}/>}
-                                        checkedIcon={<CheckBoxIcon className={classes.sizeIcon}/>}
-                                        color="primary"
+                                    <CustomCheckbox
                                         checked={this.state.dayNightLightning}
                                         onChange={this.handleChange('dayNightLightning')}
                                         value="dayNightLightning"

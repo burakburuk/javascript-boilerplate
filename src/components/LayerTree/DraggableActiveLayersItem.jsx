@@ -9,11 +9,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import CenterFocusWeak from '@material-ui/icons/CenterFocusWeak';
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import EventNote from '@material-ui/icons/EventNote';
+import Tooltip from '@material-ui/core/Tooltip';
+
+import CustomIconButton from 'kasifTheme/IconButton';
+import CustomCheckbox from 'kasifTheme/Checkbox';
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -23,15 +25,7 @@ const style = {
     cursor: 'move',
 };
 
-const styles = {
-    size: {
-        width: 16,
-    },
-    button: {
-        width: 32, height: 32,
-        padding: 0,
-    },
-};
+const styles = {};
 
 const cardSource = {
     beginDrag(props) {
@@ -115,13 +109,11 @@ class DraggableActiveLayersItem extends Component {
             connectDropTarget(
                 <div style={{...style, opacity}}>
                     <ListItem>
-                        <Checkbox color="primary" className={classes.size}
-                                  tabIndex={-1}
-                                  disableRipple
-                                  onChange={() => {
-                                      this.props.handleToggle(this.props.id);
-                                  }}
-                                  checked={checked.indexOf(this.props.id) !== -1}
+                        <CustomCheckbox
+                            onChange={() => {
+                                this.props.handleToggle(this.props.id);
+                            }}
+                            checked={checked.indexOf(this.props.id) !== -1}
                         />
                         <ListItemText disableTypography primary={text}
                                       secondary={
@@ -137,15 +129,21 @@ class DraggableActiveLayersItem extends Component {
                                                   }}/>
                                       }/>
                         <ListItemSecondaryAction>
-                            <IconButton style={styles.button}>
-                                <EventNote style={{fontSize: 20}} color="primary"/>
-                            </IconButton>
-                            <IconButton style={styles.button}>
-                                <CenterFocusWeak style={{fontSize: 20}} color="primary"/>
-                            </IconButton>
-                            <IconButton style={styles.button} aria-label="Delete">
-                                <DeleteForever style={{fontSize: 20}} color="secondary"/>
-                            </IconButton>
+                            <Tooltip id="tooltip-icon" title="Open Lejant">
+                                <CustomIconButton color="info">
+                                    <EventNote style={{color: "#FFFFFF", fontSize: 14}}/>
+                                </CustomIconButton>
+                            </Tooltip>
+                            <Tooltip id="tooltip-icon" title="Zoom to Layer">
+                                <CustomIconButton color="info">
+                                    <CenterFocusWeak style={{color: "#FFFFFF", fontSize: 14}}/>
+                                </CustomIconButton>
+                            </Tooltip>
+                            <Tooltip id="tooltip-icon" title="Delete">
+                                <CustomIconButton color="danger">
+                                    <DeleteForever style={{color: "#FFFFFF", fontSize: 16}}/>
+                                </CustomIconButton>
+                            </Tooltip>
                         </ListItemSecondaryAction>
                     </ListItem>
                 </div>),

@@ -19,7 +19,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'assets': path.resolve(__dirname, 'src/assets')
+            'assets': path.resolve(__dirname, 'src/assets'),
+            'kasifTheme': path.resolve(__dirname, 'src/theme-components')
         }
     },
     module: {
