@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CustomCheckbox from 'kasifTheme/Checkbox';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
     size: {
@@ -15,6 +16,9 @@ const styles = {
     },
     label: {
         fontSize: 10
+    },
+    checkboxFont: {
+        fontSize: 13,
     },
 };
 
@@ -52,7 +56,11 @@ class Settings extends React.Component {
                                         value="showGridLines"
                                     />
                                 }
-                                label="Show Grid Lines"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Grid Lines
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -64,7 +72,11 @@ class Settings extends React.Component {
                                         value="showNavigation"
                                     />
                                 }
-                                label="Show Navigation"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Navigation
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -76,7 +88,11 @@ class Settings extends React.Component {
                                         value="enableTerrain"
                                     />
                                 }
-                                label="Enable Terrain"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Enable Terrain
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -88,7 +104,11 @@ class Settings extends React.Component {
                                         value="showStationModel"
                                     />
                                 }
-                                label="Show Station Model"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Station Model
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -100,7 +120,11 @@ class Settings extends React.Component {
                                         value="showScalebar"
                                     />
                                 }
-                                label="Show Scalebar"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Scalebar
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -112,7 +136,11 @@ class Settings extends React.Component {
                                         value="showDrawingPanel"
                                     />
                                 }
-                                label="Show Drawing Panel"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Drawing Panel
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -124,7 +152,11 @@ class Settings extends React.Component {
                                         value="showOverviewPanel"
                                     />
                                 }
-                                label="Show Overview Panel"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Overview Panel
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -136,7 +168,11 @@ class Settings extends React.Component {
                                         value="showStatusbar"
                                     />
                                 }
-                                label="Show Statusbar"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Show Statusbar
+                                    </Typography>
+                                }
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -148,7 +184,11 @@ class Settings extends React.Component {
                                         value="dayNightLightning"
                                     />
                                 }
-                                label="Day/Night Lightning"
+                                label={
+                                    <Typography className={classes.checkboxFont}>
+                                        Day/Night Lightning
+                                    </Typography>
+                                }
                             />
                         </Grid>
                     </Grid>

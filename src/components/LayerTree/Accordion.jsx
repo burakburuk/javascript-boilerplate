@@ -14,6 +14,7 @@ import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Save from '@material-ui/icons/Save';
 import Language from '@material-ui/icons/Language';
+import LayerAdditionPopup from './LayerAdditionPopup.jsx';
 
 const styles = theme => ({
     root: {
@@ -44,11 +45,21 @@ const styles = theme => ({
 
 class Accordion extends React.Component {
     state = {
-        settingsExpanded: true
+        settingsExpanded: true,
+        layerAdditionPopupOpen: false,
     };
 
     expandChange = () => {
         this.setState({settingsExpanded: !this.state.settingsExpanded});
+    };
+
+    openLayerAdditionPopup = () => {
+        this.setState({layerAdditionPopupOpen: true});
+        console.log(this);
+    };
+
+    onLayerAdditionPopupClose = () => {
+        this.setState({layerAdditionPopupOpen: false});
     };
 
     render() {
@@ -69,18 +80,37 @@ class Accordion extends React.Component {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails className={classes.panelContent}>
                         <ActiveLayers></ActiveLayers>
+                        <LayerAdditionPopup open={this.state.layerAdditionPopupOpen}
+                                            onClose={this.onLayerAdditionPopupClose}></LayerAdditionPopup>
                     </ExpansionPanelDetails>
                     <Divider/>
                     <ExpansionPanelActions>
-                        <Button className={classes.button} variant="raised" size="small" color="secondary">
+                        <Button onClick={this.openLayerAdditionPopup} className={classes.button} variant="raised"
+                                size="small" color="secondary">
                             <Language className={classNames(classes.leftIcon, classes.iconSmall)}/>
-                            Choose a Service
+                            Get From Server
                         </Button>
                         <Button className={classes.button} variant="raised" size="small" color="primary">
                             <Save className={classNames(classes.leftIcon, classes.iconSmall)}/>
                             Save Settings
                         </Button>
                     </ExpansionPanelActions>
+                </ExpansionPanel>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                        <Typography className={classes.heading}>System Layers</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails className={classes.panelContent}>
+                        Test1
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                        <Typography className={classes.heading}>Meteorology Layers</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails className={classes.panelContent}>
+                        Test2
+                    </ExpansionPanelDetails>
                 </ExpansionPanel>
             </div>
         );
