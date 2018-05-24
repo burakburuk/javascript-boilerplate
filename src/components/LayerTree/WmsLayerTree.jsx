@@ -9,8 +9,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Collapse from '@material-ui/core/Collapse';
 import Add from '@material-ui/icons/Add';
 import Remove from '@material-ui/icons/Remove';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import CustomIconButton from 'kasifTheme/IconButton';
@@ -68,15 +66,26 @@ const testListData = {
 
 
 class WmsLayerTree extends React.Component {
-    state = {open: true};
-
-    handleClick = () => {
-        this.setState({open: !this.state.open});
+    state = {
+        treeState: {}
     };
 
+    handleToggle = (value) => {
+        const {treeState} = this.state;
+        const newChecked = Object.assign({}, treeState);
+        newChecked['ind-' + value] = treeState['ind-' + value] ? !treeState['ind-' + value] : true;
+
+        this.setState({
+            treeState: newChecked,
+        });
+    };
 
     recursiveCall = (_rootItem) => {
         let rootItem = JSON.parse(JSON.stringify(_rootItem));
+        if (typeof rootItem === "undefined" || typeof rootItem.id === "undefined") {
+            throw new Error("id parameter must be specified in tree node!");
+        }
+        const isOpen = this.state.treeState['ind-' + rootItem.id] ? this.state.treeState['ind-' + rootItem.id] : false;
         const {classes} = this.props;
 
         if (typeof rootItem.children !== "undefined") {
@@ -84,17 +93,19 @@ class WmsLayerTree extends React.Component {
             while (rootItem.children.length > 0) {
                 nodes.push(this.recursiveCall(rootItem.children.shift()));
             }
-            return [(<ListItem key={`item-${rootItem.id}-${new Date()}`} button onClick={this.handleClick}
+            return [(<ListItem key={`item-${rootItem.id}-${new Date()}`} button
+                               onClick={this.handleToggle.bind(this, rootItem.id)}
                                style={customStyle.listItem} disableGutters>
                 <ListItemIcon>
-                    {this.state.open ? <Remove style={{fontSize: 16, marginRight: -8}}/> :
+                    {isOpen ? <Remove style={{fontSize: 16, marginRight: -8}}/> :
                         <Add style={{fontSize: 16, marginRight: -8}}/>}
                 </ListItemIcon>
                 <ListItemText className={classes.inset} className={classes.primary} disableTypography
                               primary={rootItem.name}/>
             </ListItem>),
                 (<Collapse className={classes.container} key={`collapse-${rootItem.id}-${new Date()}`}
-                           in={this.state.open} timeout="auto"
+                           in={isOpen}
+                           timeout="auto"
                            unmountOnExit>
                     <List component="div" disablePadding>
                         {nodes}
