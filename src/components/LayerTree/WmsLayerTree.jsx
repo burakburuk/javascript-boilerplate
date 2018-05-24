@@ -42,27 +42,31 @@ const customStyle = {
     },
 };
 
-const testListData = {
-    id: 'root', name: 'Root', children: [
-        {id: 1, name: "Layer X"},
-        {
-            id: 2, name: "Layer Y", children: [
-                {id: 4, name: "Layer A"},
-                {id: 5, name: "Layer B"},
-                {
-                    id: 6, name: "Layer C", children: [
-                        {id: 9, name: "Layer AA"},
-                        {id: 10, name: "Layer BB"},
-                        {id: 11, name: "Layer CC"},
-                    ]
-                },
-            ]
-        },
-        {id: 3, name: "Layer Z"},
-        {id: 7, name: "Layer XY"},
-        {id: 8, name: "Layer XZ"},
-    ]
-};
+const testListData = [
+    {
+        id: 1, name: "10.0.126.34", children: [
+            {
+                id: 2, name: "Other", children: [
+                    {id: 4, name: "Spearfish"},
+                    {id: 5, name: "Tasmania"},
+                    {id: 5, name: "TIGER New York"},
+                ]
+            },
+            {
+                id: 3, name: "WCS", children: [
+                    {id: 4, name: "ANTALYA1"},
+                    {id: 5, name: "ANTALYA2"},
+                    {id: 5, name: "A sample ArcGrid file"},
+                    {id: 5, name: "Pk50095"},
+                    {id: 5, name: "mosaic"},
+                    {id: 5, name: "Spearfish elevation"},
+                    {id: 5, name: "n39"},
+                ]
+            },
+        ]
+    },
+
+];
 
 
 class WmsLayerTree extends React.Component {
@@ -105,7 +109,6 @@ class WmsLayerTree extends React.Component {
             </ListItem>),
                 (<Collapse className={classes.container} key={`collapse-${rootItem.id}-${new Date()}`}
                            in={isOpen}
-                           timeout="auto"
                            unmountOnExit>
                     <List component="div" disablePadding>
                         {nodes}
@@ -135,8 +138,8 @@ class WmsLayerTree extends React.Component {
         const {classes} = this.props;
 
         let layerTree = [];
-        for (let i = 0; i < testListData.children.length; i++) {
-            const item = this.recursiveCall(testListData.children[i]);
+        for (let i = 0; i < testListData.length; i++) {
+            const item = this.recursiveCall(testListData[i]);
             layerTree.push(...item);
         }
 

@@ -133,9 +133,7 @@ class LayerAdditionPopup extends React.Component {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.onClose} color="primary">
-                        Disagree </Button>
-                    <Button onClick={this.props.onClose} color="primary" autoFocus>
-                        Agree </Button>
+                        Cancel </Button>
                 </DialogActions>
             </Dialog>
         )

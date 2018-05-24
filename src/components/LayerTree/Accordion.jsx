@@ -55,7 +55,6 @@ class Accordion extends React.Component {
 
     openLayerAdditionPopup = () => {
         this.setState({layerAdditionPopupOpen: true});
-        console.log(this);
     };
 
     onLayerAdditionPopupClose = () => {
