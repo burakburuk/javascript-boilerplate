@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TabItemContainer from './TabItemContainer.jsx';
 import LayerTreePage from '../../components/pages/LayerTreePage.jsx';
 import UnitConverterPage from '../../components/pages/UnitConverterPage.jsx';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import FilterList from '@material-ui/icons/FilterList';
+import SwapHoriz from '@material-ui/icons/SwapHoriz';
 
 const styles = theme => ({
     root: {
@@ -18,7 +21,34 @@ const styles = theme => ({
     tabItem: {
         paddingLeft: '4px',
         paddingRight: '4px',
-    }
+    },
+    tabsRoot: {
+        background: '#00acc1',
+    },
+    tabsIndicator: {
+        backgroundColor: theme.palette.common.white,
+    },
+    tabRoot: {
+        textTransform: 'initial',
+        minWidth: 60,
+        color: theme.palette.text.disabled,
+        '&:hover': {
+            color: theme.palette.text.disabled,
+            opacity: 1,
+        },
+        '&$tabSelected': {
+            color: theme.palette.common.white,
+            fontWeight: theme.typography.fontWeightMedium,
+        },
+        '&:focus': {
+            color: theme.palette.common.white,
+        },
+    },
+    tabSelected: {},
+    labelContainer: {
+        paddingLeft: 12,
+        paddingRight: 12,
+    },
 });
 
 class RibbonMenu extends React.Component {
@@ -27,31 +57,42 @@ class RibbonMenu extends React.Component {
     };
 
     handleChange = (event, value) => {
-        this.setState({ value });
+        this.setState({value});
     };
 
     render() {
-        const { classes } = this.props;
-        const { value } = this.state;
+        const {classes} = this.props;
+        const {value} = this.state;
 
         return (
             <div className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
+                        classes={{root: classes.tabsRoot, indicator: classes.tabsIndicator}}
                         value={value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
                         scrollable
-                        scrollButtons="auto"
-                    >
-                        <Tab label="Layer Tree" />
-                        <Tab label="Item Two" />
-                        <Tab label="Item Three" />
-                        <Tab label="Item Four" />
-                        <Tab label="Item Five" />
-                        <Tab label="Item Six" />
-                        <Tab label="Item Seven" />
+                        scrollButtons="auto">
+                        <Tab classes={{
+                            root: classes.tabRoot,
+                            labelContainer: classes.labelContainer,
+                            selected: classes.tabSelected
+                        }}
+                             label="Layer 3" icon={<FilterList/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             label="Converter" icon={<SwapHoriz/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             icon={<PersonPinIcon/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             icon={<PersonPinIcon/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             icon={<PersonPinIcon/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             icon={<PersonPinIcon/>}/>
+                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                             icon={<PersonPinIcon/>}/>
                     </Tabs>
                 </AppBar>
                 {value === 0 && <TabItemContainer>
