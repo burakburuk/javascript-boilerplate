@@ -8,11 +8,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Collapse from '@material-ui/core/Collapse';
 import Add from '@material-ui/icons/Add';
+import Remove from '@material-ui/icons/Remove';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import CustomIconButton from 'kasifTheme/IconButton';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const styles = theme => ({
     root: {
@@ -20,40 +22,49 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
         position: 'relative',
         overflow: 'auto',
-        maxHeight: 300,
+        height: 150,
+        maxHeight: 150,
     },
     nested: {
         paddingLeft: theme.spacing.unit * 4,
     },
+    primary: {
+        fontSize: 14,
+    },
+    container: {
+        paddingLeft: 20,
+    },
 });
 
 const customStyle = {
-    listItemText: {
-        paddingLeft: 0,
-        fontSize: 14,
-    },
+    listItemText: {},
     listItem: {
         paddingTop: 4,
         paddingBottom: 4,
     },
 };
 
-const testListData = [
-    {id: 1, name: "Layer X"},
-    {
-        id: 2, name: "Layer Y", children: [
-            {id: 4, name: "Layer A"},
-            {id: 5, name: "Layer B"},
-            {id: 6, name: "Layer C"},
-        ]
-    },
-    {id: 3, name: "Layer Z"},
-    {id: 7, name: "Layer Z"},
-    {id: 8, name: "Layer Z"},
-    {id: 9, name: "Layer Z"},
-    {id: 10, name: "Layer Z"},
-    {id: 11, name: "Layer Z"},
-];
+const testListData = {
+    id: 'root', name: 'Root', children: [
+        {id: 1, name: "Layer X"},
+        {
+            id: 2, name: "Layer Y", children: [
+                {id: 4, name: "Layer A"},
+                {id: 5, name: "Layer B"},
+                {
+                    id: 6, name: "Layer C", children: [
+                        {id: 9, name: "Layer AA"},
+                        {id: 10, name: "Layer BB"},
+                        {id: 11, name: "Layer CC"},
+                    ]
+                },
+            ]
+        },
+        {id: 3, name: "Layer Z"},
+        {id: 7, name: "Layer XY"},
+        {id: 8, name: "Layer XZ"},
+    ]
+};
 
 
 class WmsLayerTree extends React.Component {
@@ -63,49 +74,67 @@ class WmsLayerTree extends React.Component {
         this.setState({open: !this.state.open});
     };
 
-    createRecursiveTree = (rootItem) => {
-        return testListData.map(item => {
-            return (<ListItem key={`item-${item.id}-${item}`} button style={customStyle.listItem}>
-                <ListItemText disableTypography style={customStyle.listItemText} primary={item.name}/>
-                <ListItemSecondaryAction>
-                    <Tooltip title="Add Layer">
-                        <CustomIconButton>
-                            <Add style={{fontSize: 16}}/>
-                        </CustomIconButton>
-                    </Tooltip>
-                </ListItemSecondaryAction>
-            </ListItem>)
-        })
+
+    recursiveCall = (_rootItem) => {
+        let rootItem = JSON.parse(JSON.stringify(_rootItem));
+        const {classes} = this.props;
+
+        if (typeof rootItem.children !== "undefined") {
+            let nodes = [];
+            while (rootItem.children.length > 0) {
+                nodes.push(this.recursiveCall(rootItem.children.shift()));
+            }
+            return [(<ListItem key={`item-${rootItem.id}-${new Date()}`} button onClick={this.handleClick}
+                               style={customStyle.listItem} disableGutters>
+                <ListItemIcon>
+                    {this.state.open ? <Remove style={{fontSize: 16, marginRight: -8}}/> :
+                        <Add style={{fontSize: 16, marginRight: -8}}/>}
+                </ListItemIcon>
+                <ListItemText className={classes.inset} className={classes.primary} disableTypography
+                              primary={rootItem.name}/>
+            </ListItem>),
+                (<Collapse className={classes.container} key={`collapse-${rootItem.id}-${new Date()}`}
+                           in={this.state.open} timeout="auto"
+                           unmountOnExit>
+                    <List component="div" disablePadding>
+                        {nodes}
+                    </List>
+                </Collapse>)];
+        } else {
+            return (
+                [<ListItem key={`item-${rootItem.id}-${new Date()}`} style={customStyle.listItem} disableGutters button>
+                    <ListItemIcon>
+                        <Remove style={{fontSize: 16, marginRight: -8}}/>
+                    </ListItemIcon>
+                    <ListItemText className={classes.inset} className={classes.primary} disableTypography
+                                  primary={rootItem.name}/>
+                    <ListItemSecondaryAction>
+                        <Tooltip title="Add Layer">
+                            <CustomIconButton>
+                                <Add style={{fontSize: 16}}/>
+                            </CustomIconButton>
+                        </Tooltip>
+                    </ListItemSecondaryAction>
+                </ListItem>]
+            );
+        }
     };
 
     render() {
         const {classes} = this.props;
 
-        const layerTree = this.createRecursiveTree(testListData);
+        let layerTree = [];
+        for (let i = 0; i < testListData.children.length; i++) {
+            const item = this.recursiveCall(testListData.children[i]);
+            layerTree.push(...item);
+        }
 
         return (
-            <div className={classes.root}>
-                <List
-                    component="nav">
-                    {
-                        layerTree
-                    }
-                    <ListItem button style={customStyle.listItem}>
-                        <ListItemText style={customStyle.listItemText} primary="Drafts"/>
-                    </ListItem>
-                    <ListItem button onClick={this.handleClick} style={customStyle.listItem}>
-                        <ListItemText style={customStyle.listItemText} primary="Inbox"/>
-                        {this.state.open ? <ExpandLess/> : <ExpandMore/>}
-                    </ListItem>
-                    <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            <ListItem button style={customStyle.listItem}>
-                                <ListItemText inset primary="Starred"/>
-                            </ListItem>
-                        </List>
-                    </Collapse>
-                </List>
-            </div>
+            <List component="nav" className={classes.root}>
+                {
+                    layerTree
+                }
+            </List>
         );
     }
 }
