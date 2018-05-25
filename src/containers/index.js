@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Switch, Route, Redirect } from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
-import { withStyles } from "material-ui";
+import {withStyles} from "material-ui";
 
 import Sidebar from "./Sidebar/Sidebar.jsx";
 
@@ -19,8 +19,8 @@ const switchRoutes = (
     <Switch>
         {dashboardRoutes.map((prop, key) => {
             if (prop.redirect)
-                return <Redirect from={prop.path} to={prop.to} key={key} />;
-            return <Route path={prop.path} component={prop.component} key={key} />;
+                return <Redirect from={prop.path} to={prop.to} key={key}/>;
+            return <Route path={prop.path} component={prop.component} key={key}/>;
         })}
     </Switch>
 );
@@ -30,22 +30,26 @@ class App extends React.Component {
         mobileOpen: false
     };
     handleDrawerToggle = () => {
-        this.setState({ mobileOpen: !this.state.mobileOpen });
+        this.setState({mobileOpen: !this.state.mobileOpen});
     };
+
     getRoute() {
         return this.props.location.pathname !== "/maps";
     }
+
     componentDidMount() {
         if (navigator.platform.indexOf('Win') > -1) {
             // eslint-disable-next-line
             const ps = new PerfectScrollbar(this.refs.mainPanel);
         }
     }
+
     componentDidUpdate() {
         this.refs.mainPanel.scrollTop = 0;
     }
+
     render() {
-        const { classes, ...rest } = this.props;
+        const {classes, ...rest} = this.props;
         return (
             <div className={classes.wrapper}>
                 <Sidebar
@@ -65,8 +69,8 @@ class App extends React.Component {
                             <div className={classes.container}>{switchRoutes}</div>
                         </div>
                     ) : (
-                            <div className={classes.map}>{switchRoutes}</div>
-                        )}
+                        <div className={classes.map}>{switchRoutes}</div>
+                    )}
                 </div>
             </div>
         );

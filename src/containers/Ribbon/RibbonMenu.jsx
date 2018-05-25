@@ -9,6 +9,7 @@ import LayerTreePage from '../../components/pages/LayerTreePage.jsx';
 import UnitConverterPage from '../../components/pages/UnitConverterPage.jsx';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import FilterList from '@material-ui/icons/FilterList';
+import ShowChart from '@material-ui/icons/ShowChart';
 import SwapHoriz from '@material-ui/icons/SwapHoriz';
 
 const styles = theme => ({
@@ -31,9 +32,9 @@ const styles = theme => ({
     tabRoot: {
         textTransform: 'initial',
         minWidth: 60,
-        color: theme.palette.text.disabled,
+        color: '#CCD6CD',
         '&:hover': {
-            color: theme.palette.text.disabled,
+            color: theme.palette.common.white,
             opacity: 1,
         },
         '&$tabSelected': {
@@ -81,17 +82,33 @@ class RibbonMenu extends React.Component {
                             selected: classes.tabSelected
                         }}
                              label="Layer 3" icon={<FilterList/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                        <Tab classes={{
+                            root: classes.tabRoot, labelContainer: classes.labelContainer,
+                            selected: classes.tabSelected
+                        }}
                              label="Converter" icon={<SwapHoriz/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                        <Tab label="Analyses" classes={{
+                            root: classes.tabRoot, labelContainer: classes.labelContainer,
+                            selected: classes.tabSelected
+                        }}
+                             icon={<ShowChart/>}/>
+                        <Tab label="Annotations"
+                             classes={{
+                                 root: classes.tabRoot, labelContainer: classes.labelContainer,
+                                 selected: classes.tabSelected
+                             }}
                              icon={<PersonPinIcon/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                        <Tab label="Area of Interest"
+                             classes={{
+                                 root: classes.tabRoot, labelContainer: classes.labelContainer,
+                                 selected: classes.tabSelected
+                             }}
                              icon={<PersonPinIcon/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
-                             icon={<PersonPinIcon/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
-                             icon={<PersonPinIcon/>}/>
-                        <Tab classes={{root: classes.tabRoot, labelContainer: classes.labelContainer}}
+                        <Tab label="Meteorology"
+                             classes={{
+                                 root: classes.tabRoot, labelContainer: classes.labelContainer,
+                                 selected: classes.tabSelected
+                             }}
                              icon={<PersonPinIcon/>}/>
                     </Tabs>
                 </AppBar>
@@ -105,7 +122,6 @@ class RibbonMenu extends React.Component {
                 {value === 3 && <TabItemContainer>Item Four</TabItemContainer>}
                 {value === 4 && <TabItemContainer>Item Five</TabItemContainer>}
                 {value === 5 && <TabItemContainer>Item Six</TabItemContainer>}
-                {value === 6 && <TabItemContainer>Item Seven</TabItemContainer>}
             </div>
         );
     }
