@@ -1,52 +1,22 @@
-import MUtil from "./utils";
+import '../conf/conf';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
 
-var _host = 'http://my-json-server.typicode.com/burakburuk/javascript-test/';
+import "assets/css/material-dashboard-react.css?v=1.2.0";
 
-window.addEventListener('load', function () {
-    window.resultBox = document.getElementsByTagName('textarea')[0]
-    getAllPersonList();
-    document.getElementById("btnTest").addEventListener("click", function (e) {
-        testApi();
-    });
+import indexRoutes from "./routes/index.jsx";
 
-}, false);
+const hist = createBrowserHistory();
 
-function populateSelectBox(personList) {
-    let select = document.getElementsByTagName('select')[0];
-    personList.forEach(function (item) {
-        let option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = item.name + " " + item.surname;
-        select.appendChild(option);
-    });
-}
-
-async function getAllPersonList() {
-    try {
-        let personList = await MUtil.ajax(_host + 'person');
-        personList = JSON.parse(personList);
-        populateSelectBox(personList);
-    } catch (error) {
-        resultBox.innerText = "Person list could not be fetched!";
-    }
-}
-
-async function testApi() {
-    try {
-        let select = document.getElementsByTagName('select')[0];
-        if (select && select.value) {
-            let person = await MUtil.ajax(_host + 'person/' + select.value);
-            person = JSON.parse(person);
-
-            let address = await MUtil.ajax(_host + 'address/' + person.id);
-            address = JSON.parse(address);
-
-            resultBox.innerText = "Person : " + person.name + " " + person.surname + ", City : " + address.city;
-        } else {
-            resultBox.innerText = "Please Select Person!";
-        }
-    } catch (err) {
-        resultBox.innerText = err.statusText;
-    }
-}
-
+ReactDOM.render(
+    <Router history={hist}>
+        <Switch>
+            {indexRoutes.map((prop, key) => {
+                return <Route path={prop.path} component={prop.component} key={key} />;
+            })}
+        </Switch>
+    </Router>,
+    document.getElementById("app")
+);
