@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import DraggableActiveLayersItem from './DraggableActiveLayersItem.jsx';
+import MessageBox from '../../utils/MessageBox.jsx';
 
 const styles = theme => ({
     root: {
@@ -28,6 +29,8 @@ class ActiveLayers extends React.Component {
         this.state = {
             checked: ['layer1'],
             sliderValue: {},
+            openSnackbar: false,
+            snackMessage: "",
             cards: [
                 {
                     id: 'layer1',
@@ -86,9 +89,17 @@ class ActiveLayers extends React.Component {
         });
     };
 
+    removeLayer = (layerId) => {
+        this.setState({ openSnackbar: true });
+    };
+
+    handleSnackbarClose = () => {
+        this.setState({ openSnackbar: false });
+    };
+
     render() {
         const {classes} = this.props;
-        const {cards} = this.state;
+        const {cards, openSnackbar} = this.state;
 
         return (
             <div className={classes.dragArea}>
@@ -104,9 +115,11 @@ class ActiveLayers extends React.Component {
                             checked={this.state.checked}
                             onSliderChange={this.onSliderChange}
                             sliderValue={this.state.sliderValue}
+                            removeLayer={this.removeLayer}
                         ></DraggableActiveLayersItem>
                     ))}
                 </List>
+                <MessageBox message={this.state.snackMessage}></MessageBox>
             </div>
         )
     }

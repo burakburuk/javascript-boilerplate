@@ -143,7 +143,7 @@ class DraggableActiveLayersItem extends Component {
                             <IconButton style={styles.button}>
                                 <CenterFocusWeak style={{fontSize: 20}} color="primary"/>
                             </IconButton>
-                            <IconButton style={styles.button} aria-label="Delete">
+                            <IconButton onClick={this.props.removeLayer} style={styles.button} aria-label="Delete">
                                 <DeleteForever style={{fontSize: 20}} color="secondary"/>
                             </IconButton>
                         </ListItemSecondaryAction>
